@@ -784,16 +784,20 @@ const nonvegClear = document.getElementById('nonveg-clear');
 // Event listeners
 vegToggle.addEventListener('click', (e) => {
   if (e.target === vegClear) return;
-  vegToggle.classList.toggle('active');
+ if (!vegToggle.classList.contains('active')) {
+  vegToggle.classList.add('active');
   nonvegToggle.classList.remove('active');
   filterDishes('veg');
+}
 });
 
 nonvegToggle.addEventListener('click', (e) => {
   if (e.target === nonvegClear) return;
-  nonvegToggle.classList.toggle('active');
+ if (!nonvegToggle.classList.contains('active')) {
+  nonvegToggle.classList.add('active');
   vegToggle.classList.remove('active');
   filterDishes('nonveg');
+}
 });
 
 vegClear.addEventListener('click', (e) => {
