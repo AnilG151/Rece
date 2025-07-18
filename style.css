@@ -409,4 +409,39 @@ input:checked + .slider:before {
   80%  { opacity: 1; }
   100% { opacity: 0; }
 }
+/* Toggle button wrapper */
+.toggle-filters {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+/* Match nav styles */
+.nav-btn {
+  background-color: #f0c75e;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.nav-btn.active {
+  background-color: #4caf50; /* Green for Veg by default */
+  color: white;
+}
+
+#nonveg-toggle.active {
+  background-color: #e53935; /* Red for Non-Veg */
+}
+
+/* ❌ Cross inside toggle */
+.clear-x {
+  margin-left: 8px;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+}
  </style>
