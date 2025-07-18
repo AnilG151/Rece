@@ -147,7 +147,7 @@
 </div>
 
   <div class="menu-section menu-column" data-category="Breads">
-  <h2>🫓 Breads 🌿</h2>
+  <h2 id="breads">🫓 Breads 🌿</h2>
   <img src="breads.jpg" class="section-image" alt="Currchi Breads">
   <div class="menu-header">
     <span>Items</span>
@@ -333,7 +333,7 @@
 </div>
 
     <div class="menu-section menu-column" data-category="raita-salad">
-  <h2>🥗 Raita & Salad 🌿 </h2>
+  <h2 id="raita-salad">🥗 Raita & Salad 🌿</h2>
   <img src="salad.jpg" class="section-image" alt="Currchi Raita and Salad">
   <div class="menu-header">
     <span>Items</span>
@@ -449,7 +449,7 @@ function launchBalloon() {
   function scrollToSection(id) {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 </script>
