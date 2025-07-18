@@ -775,5 +775,95 @@ let current = 0;
     setInterval(showNextMessage, 6500); // Total time per message
   }, 2000);
 </script>
+   <script>
+const vegToggle = document.getElementById('veg-toggle');
+const nonvegToggle = document.getElementById('nonveg-toggle');
+const vegClear = document.getElementById('veg-clear');
+const nonvegClear = document.getElementById('nonveg-clear');
+
+// Event listeners
+vegToggle.addEventListener('click', (e) => {
+  if (e.target === vegClear) return;
+  vegToggle.classList.toggle('active');
+  nonvegToggle.classList.remove('active');
+  filterDishes('veg');
+});
+
+nonvegToggle.addEventListener('click', (e) => {
+  if (e.target === nonvegClear) return;
+  nonvegToggle.classList.toggle('active');
+  vegToggle.classList.remove('active');
+  filterDishes('nonveg');
+});
+
+vegClear.addEventListener('click', (e) => {
+  e.stopPropagation();
+  clearFilter();
+});
+
+nonvegClear.addEventListener('click', (e) => {
+  e.stopPropagation();
+  clearFilter();
+});
+
+// Clear filter function
+function clearFilter() {
+  vegToggle.classList.remove('active');
+  nonvegToggle.classList.remove('active');
+  document.querySelectorAll('.menu-item').forEach(item => {
+    item.style.display = '';
+  });
+  hideVegPlaceholders();
+}
+
+// Filter logic
+function filterDishes(type) {
+  document.querySelectorAll('.menu-item').forEach(item => {
+    const text = item.innerText;
+    const section = item.closest('.menu-column')?.querySelector('h2')?.innerText || '';
+
+    const isVeg = text.includes('🌿') || section.includes('🥗') || section.includes('🫓');
+    const isNonVeg = text.includes('🍖');
+
+    if (type === 'veg') {
+      item.style.display = isVeg ? '' : 'none';
+    } else if (type === 'nonveg') {
+      item.style.display = isNonVeg ? '' : 'none';
+    }
+  });
+
+  showVegPlaceholdersIfEmpty();
+}
+
+// Add placeholder messages to veg-only sections if needed
+function showVegPlaceholdersIfEmpty() {
+  document.querySelectorAll('.menu-section').forEach(section => {
+    const heading = section.querySelector('h2')?.innerText || '';
+    const isAlwaysVeg = heading.includes('🥗') || heading.includes('🫓');
+
+    const visibleItems = section.querySelectorAll('.menu-item:not([style*="display: none"])');
+
+    let placeholder = section.querySelector('.veg-placeholder');
+    if (!placeholder) {
+      placeholder = document.createElement('div');
+      placeholder.className = 'veg-placeholder';
+      placeholder.innerHTML = `<em>Please select Veg items</em>`;
+      section.appendChild(placeholder);
+    }
+
+    if (isAlwaysVeg && visibleItems.length === 0) {
+      placeholder.style.display = 'block';
+    } else {
+      placeholder.style.display = 'none';
+    }
+  });
+}
+
+function hideVegPlaceholders() {
+  document.querySelectorAll('.veg-placeholder').forEach(msg => {
+    msg.style.display = 'none';
+  });
+}
+</script>
 </body>
 </html>
