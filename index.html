@@ -775,29 +775,25 @@ let current = 0;
     setInterval(showNextMessage, 6500); // Total time per message
   }, 1000);
 </script>
-   <script>
+<script>
 const vegToggle = document.getElementById('veg-toggle');
 const nonvegToggle = document.getElementById('nonveg-toggle');
 const vegClear = document.getElementById('veg-clear');
 const nonvegClear = document.getElementById('nonveg-clear');
 
-// Event listeners
+// Toggle events
 vegToggle.addEventListener('click', (e) => {
   if (e.target === vegClear) return;
- if (!vegToggle.classList.contains('active')) {
-  vegToggle.classList.add('active');
-  nonvegToggle.classList.remove('active');
+  vegToggle.classList.add('active', 'veg');
+  nonvegToggle.classList.remove('active', 'nonveg');
   filterDishes('veg');
-}
 });
 
 nonvegToggle.addEventListener('click', (e) => {
   if (e.target === nonvegClear) return;
- if (!nonvegToggle.classList.contains('active')) {
-  nonvegToggle.classList.add('active');
-  vegToggle.classList.remove('active');
+  nonvegToggle.classList.add('active', 'nonveg');
+  vegToggle.classList.remove('active', 'veg');
   filterDishes('nonveg');
-}
 });
 
 vegClear.addEventListener('click', (e) => {
@@ -810,10 +806,9 @@ nonvegClear.addEventListener('click', (e) => {
   clearFilter();
 });
 
-// Clear filter function
 function clearFilter() {
-  vegToggle.classList.remove('active');
-  nonvegToggle.classList.remove('active');
+  vegToggle.classList.remove('active', 'veg');
+  nonvegToggle.classList.remove('active', 'nonveg');
   document.querySelectorAll('.menu-item').forEach(item => {
     item.style.display = '';
   });
@@ -839,7 +834,6 @@ function filterDishes(type) {
   showVegPlaceholdersIfEmpty();
 }
 
-// Add placeholder messages to veg-only sections if needed
 function showVegPlaceholdersIfEmpty() {
   document.querySelectorAll('.menu-section').forEach(section => {
     const heading = section.querySelector('h2')?.innerText || '';
