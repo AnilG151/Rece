@@ -877,23 +877,22 @@ function hideVegPlaceholders() {
   });
 }
 </script>
-  <script>
-  const searchInput = document.getElementById('searchInput');
-
-  searchInput.addEventListener('input', function () {
+<script>
+  document.getElementById('searchInput').addEventListener('input', function () {
     const searchTerm = this.value.toLowerCase();
-    const allItems = document.querySelectorAll('.menu-item');
+
+    // Select all menu items that have data-name
+    const allItems = document.querySelectorAll('.menu-item[data-name]');
 
     allItems.forEach(item => {
-      const itemName = item.querySelector('.item-name')?.textContent?.toLowerCase() || '';
+      const itemName = item.dataset.name.toLowerCase();
       const isVisible = itemName.includes(searchTerm);
       item.style.display = isVisible ? 'flex' : 'none';
     });
 
-    // Optionally show/hide entire sections based on results
-    const sections = document.querySelectorAll('.menu-section');
-    sections.forEach(section => {
-      const visibleItems = section.querySelectorAll('.menu-item:not([style*="display: none"])');
+    // Hide section if all its items are hidden
+    document.querySelectorAll('.menu-section').forEach(section => {
+      const visibleItems = section.querySelectorAll('.menu-item[data-name]:not([style*="display: none"])');
       section.style.display = visibleItems.length > 0 ? 'block' : 'none';
     });
   });
