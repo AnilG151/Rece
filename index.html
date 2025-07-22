@@ -114,8 +114,8 @@
   <div class="menu-item" data-name="🌿 Kashmiri Rajma Masala Combo" data-price="135"></div>
   <div class="menu-item" data-name="🌿 Pindi Channa Combo" data-price="135"></div>
   <div class="menu-item" data-name="🌿 Dal Makhani Combo" data-price="135"></div>
-  <div class="menu-item" data-name="🌿 Veg Manchurian + Fried Rice" data-price="135"></div>
-  <div class="menu-item" data-name="🌿 Hakka Noodles + Manchurian" data-price="135"></div>
+  <div class="menu-item" data-name="🌿 Veg Manchurian + Fried Rice Combo" data-price="135"></div>
+  <div class="menu-item" data-name="🌿 Hakka Noodles + Manchurian Combo" data-price="135"></div>
   <div class="menu-item" data-name="🌿 Palak Paneer Combo" data-price="145"></div>
   <div class="menu-item" data-name="🌿 Shahi Paneer Combo" data-price="145"></div>
   <div class="menu-item" data-name="🌿 Kadai Paneer Combo" data-price="145"></div>
@@ -636,7 +636,7 @@ function updateCartDisplay() {
   message += `%0A🧾 Total: ₹${total}%0A%0APlease confirm the order.`;
 
   if (cartTotal) cartTotal.textContent = `Total: ₹${total}`;
-  if (whatsappLink) whatsappLink.href = `https://wa.me/919899427503?text=${message}`;
+  if (whatsappLink) whatsappLink.href = `https://wa.me/919899427503?text=${encodeURIComponent(message)}`;
 
   // ✅ Show or hide cart panel
 if (Object.values(cart).some(qty => qty > 0)) {
