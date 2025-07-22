@@ -636,7 +636,7 @@ function updateCartDisplay() {
   message += `%0A🧾 Total: ₹${total}%0A%0APlease confirm the order.`;
 
   if (cartTotal) cartTotal.textContent = `Total: ₹${total}`;
-  if (whatsappLink) whatsappLink.href = `https://wa.me/919899427503?text=(message)}`;
+  if (whatsappLink) whatsappLink.href = `https://wa.me/919899427503?text=${message}`;
 
   // ✅ Show or hide cart panel
 if (Object.values(cart).some(qty => qty > 0)) {
