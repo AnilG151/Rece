@@ -878,22 +878,25 @@ function hideVegPlaceholders() {
 }
 </script>
 <script>
-  document.getElementById('searchInput').addEventListener('input', function () {
-    const searchTerm = this.value.toLowerCase();
+  const searchInput = document.getElementById("searchInput");
 
-    // Select all menu items that have data-name
-    const allItems = document.querySelectorAll('.menu-item[data-name]');
+  searchInput.addEventListener("input", function () {
+    const query = this.value.toLowerCase();
+    const sections = document.querySelectorAll(".menu-section");
 
-    allItems.forEach(item => {
-      const itemName = item.dataset.name.toLowerCase();
-      const isVisible = itemName.includes(searchTerm);
-      item.style.display = isVisible ? 'flex' : 'none';
-    });
+    sections.forEach((section) => {
+      const items = section.querySelectorAll(".menu-item");
+      let sectionHasMatch = false;
 
-    // Hide section if all its items are hidden
-    document.querySelectorAll('.menu-section').forEach(section => {
-      const visibleItems = section.querySelectorAll('.menu-item[data-name]:not([style*="display: none"])');
-      section.style.display = visibleItems.length > 0 ? 'block' : 'none';
+      items.forEach((item) => {
+        const itemName = item.dataset.name?.toLowerCase() || "";
+        const match = itemName.includes(query);
+        item.style.display = match ? "" : "none";
+        if (match) sectionHasMatch = true;
+      });
+
+      // Hide entire section if no items match
+      section.style.display = sectionHasMatch ? "" : "none";
     });
   });
 </script>
