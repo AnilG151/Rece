@@ -53,6 +53,14 @@
     <a href="tel:+919211791827"><button>📞 Call Us</button></a>
     <a href="https://wa.me/919899427503?text=Hi%20Currchi%20-%20Full%20on%20Desi!!%20I%20want%20to%20place%20an%20order." target="_blank"><button> 💬 WhatsApp Us</button></a>
   </div>
+  <div style="text-align:center; margin: 20px;">
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="🔍 Search Currchi items..."
+    style="width: 80%; max-width: 400px; padding: 10px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc;"
+  />
+</div>
   <!-- Menu Sections -->
  <div class="menu-container" id="menu">
   <div class="menu-column" id="rolls">
@@ -868,6 +876,27 @@ function hideVegPlaceholders() {
     msg.style.display = 'none';
   });
 }
+</script>
+  <script>
+  const searchInput = document.getElementById('searchInput');
+
+  searchInput.addEventListener('input', function () {
+    const searchTerm = this.value.toLowerCase();
+    const allItems = document.querySelectorAll('.menu-item');
+
+    allItems.forEach(item => {
+      const itemName = item.querySelector('.item-name')?.textContent?.toLowerCase() || '';
+      const isVisible = itemName.includes(searchTerm);
+      item.style.display = isVisible ? 'flex' : 'none';
+    });
+
+    // Optionally show/hide entire sections based on results
+    const sections = document.querySelectorAll('.menu-section');
+    sections.forEach(section => {
+      const visibleItems = section.querySelectorAll('.menu-item:not([style*="display: none"])');
+      section.style.display = visibleItems.length > 0 ? 'block' : 'none';
+    });
+  });
 </script>
 </body>
 </html>
